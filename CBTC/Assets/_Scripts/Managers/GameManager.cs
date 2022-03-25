@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager
 {
-    public enum GameState { START, GAME, ENDGAME }
+    public enum GameState { START, GAME, SPAWN, ENDGAME }
 
     public GameState gameState { get; private set; }
 

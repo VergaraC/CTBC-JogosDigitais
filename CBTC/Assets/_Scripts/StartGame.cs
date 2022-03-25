@@ -9,17 +9,15 @@ public class StartGame : MonoBehaviour
     void Start()
     {
         gm = GameManager.GetInstance();
-        Debug.Log("startscript");
     }
 
     public void ClickStart()
     {
         gm.ChangeState(GameManager.GameState.GAME);
-        Debug.Log("start");
     }
 
     public void ClickQuit()
     {
-        Debug.Log("fechou");
+        Application.Quit();
     }
 }
