@@ -5,6 +5,7 @@ using System.Linq;
 
 public class GridManager : MonoBehaviour
 {
+    public static GridManager Instance;
 
     [SerializeField] private int _width, _height;
     [SerializeField] private Tile _tilePrefab;
@@ -14,6 +15,9 @@ public class GridManager : MonoBehaviour
 
     GameManager gm;
 
+    void Awake() {
+            Instance = this;
+        }
     void Start() {
         GenerateGrid();
         gm = GameManager.GetInstance();

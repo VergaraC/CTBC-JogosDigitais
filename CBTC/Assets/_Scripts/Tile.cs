@@ -9,7 +9,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject _highlight;
     [SerializeField] private bool _isWalkable;
 
-    public baseUnit OccupiedUnit;
+    public BaseUnit OccupiedUnit;
     public bool Walkable => _isWalkable && OccupiedUnit == null;
     public void Init(bool isOffset)
     {
