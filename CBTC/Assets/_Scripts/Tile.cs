@@ -28,6 +28,6 @@ public class Tile : MonoBehaviour
         if(unit.OccupiedTile != null) unit.OccupiedTile.OccupiedUnit = null;
         unit.transform.position = transform.position;
         OccupiedUnit = unit;
-        unit.OccupiedTile == this;
+        unit.OccupiedTile = this;
     }
 }

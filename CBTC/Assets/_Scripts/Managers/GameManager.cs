@@ -35,6 +35,10 @@ public class GameManager
 
         gameState = nextState;
         changeStateDelegate();
+        /* if (nextState == GameState.SpawnHeroes){
+             UnitManager.Instance.SpawnHeroes();
+
+         }*/
     }
 
     private void Reset()
