@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseColor: {r: 0.016019935, g: 0.6792453, b: 0.09588773, a: 1}
-  _offsetColor: {r: 0, g: 0.5471698, b: 0.06475378, a: 1}
+  _offsetColor: {r: 0.6603774, g: 0.19624422, b: 0.6345352, a: 1}
   _renderer: {fileID: 271074786483891535}
   _highlight: {fileID: 8588808260023052524}
 --- !u!61 &9173042436129918966

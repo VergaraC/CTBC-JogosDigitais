@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class BaseUnit : MonoBehaviour
 {
+    public Tile OccupiedTile;
+    void Start(){
+
+    }
+    void Update()
+    {
+        
+    }
    
 }
