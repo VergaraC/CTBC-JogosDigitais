@@ -5,6 +5,7 @@ using System.Linq;
 
 public class GridManager : MonoBehaviour
 {
+    public static GridManager Instance;
 
     [SerializeField] private int _width, _height;
     [SerializeField] private Tile _tilePrefab;
@@ -14,6 +15,10 @@ public class GridManager : MonoBehaviour
 
     GameManager gm;
 
+    void Awake()
+    {
+        Instance = this;   
+    }
     void Start() {
         GenerateGrid();
         gm = GameManager.GetInstance();
@@ -37,10 +42,15 @@ public class GridManager : MonoBehaviour
 
     public Tile GetHeroSpawnTile()
     {
-        return _tiles.Where(t => t.Key.x < _width / 2).OrderBy(t => Random.value).First().Value;
+        return _tiles.Where(t => t.Key.x < _width / 2 && t.Value.Walkable).OrderBy(t => Random.value).First().Value;
     }
     public Tile GetEnemySpawnTile()
     {
-        return _tiles.Where(t => t.Key.x < _width / 2).OrderBy(t => Random.value).First().Value;
+        return _tiles.Where(t => t.Key.x < _width / 2 && t.Value.Walkable).OrderBy(t => Random.value).First().Value;
+    }
+    public Tile GetTileAtPosition(Vector2 pos)
+    {
+        if (_tiles.TryGetValue(pos, out var tile)) return tile;
+        return null;
     }
 }
