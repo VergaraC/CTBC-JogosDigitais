@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,19 +6,17 @@ using UnityEngine;
 public class ActiveOnSomeStates : MonoBehaviour
 {
 
-    public GameManager.GameState[] activeStates;
-    GameManager gm;
+    public GameState[] activeStates;
 
     void Start()
     {
-        gm = GameManager.GetInstance();
         GameManager.changeStateDelegate += UpdateVisibility;
         UpdateVisibility();
     }
 
     void UpdateVisibility()
     {
-        if (activeStates.Contains(gm.gameState))
+        if (activeStates.Contains(GameManager.Instance.GameState))
         {
             gameObject.SetActive(true);
         }

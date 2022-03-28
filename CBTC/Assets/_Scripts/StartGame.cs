@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class StartGame : MonoBehaviour
 {
-    GameManager gm;
-
     void Start()
     {
-        gm = GameManager.GetInstance();
+
     }
 
     public void ClickStart()
     {
-        gm.ChangeState(GameManager.GameState.SPAWNHERO);
+        GameManager.Instance.ChangeState(GameState.GenerateGrid);
+        gameObject.SetActive(false);
     }
 
     public void ClickQuit()

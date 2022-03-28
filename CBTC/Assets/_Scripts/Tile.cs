@@ -12,11 +12,9 @@ public class Tile : MonoBehaviour
     public BaseUnit OccupiedUnit;
     public bool Walkable => _isWalkable && OccupiedUnit == null;
 
-    GameManager gm;
-
     private void Start()
     {
-        gm = GameManager.GetInstance();
+       
     }
 
     public virtual void Init1(int x, int y)
@@ -40,7 +38,7 @@ public class Tile : MonoBehaviour
     void OnMouseDown()
     {
         
-        if (gm.gameState != GameManager.GameState.HEROTURN)
+        if (GameManager.Instance.GameState != GameState.HeroesTurn)
         {
             Debug.Log("NOT HERO");
             return;

@@ -7,15 +7,12 @@ public class UnitManager : MonoBehaviour
 {
     public static UnitManager Instance;
     private List<ScriptableUnit> _units;
-    GameManager gm;
 
     void Awake()
     {
         Instance = this;
 
         _units = Resources.LoadAll<ScriptableUnit>("Units").ToList();
-
-        gm = GameManager.GetInstance();
     }
 
     public void SpawnHeroes()
@@ -30,8 +27,8 @@ public class UnitManager : MonoBehaviour
 
             randomSpawnTile.SetUnit(spawnedHero);
 
-            gm.ChangeState(GameManager.GameState.SPAWNENEMY);
         }
+        GameManager.Instance.ChangeState(GameState.SpawnEnemies);
     }
 
     public void SpawnEnemies()
@@ -46,8 +43,8 @@ public class UnitManager : MonoBehaviour
 
             randomSpawnTile.SetUnit(spawnedEnemy);
 
-            gm.ChangeState(GameManager.GameState.HEROTURN);
         }
+        GameManager.Instance.ChangeState(GameState.HeroesTurn);
     }
 
     private T GetRandomUnit<T>(Faction faction) where T : BaseUnit

@@ -1,61 +1,58 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager
+public class GameManager : MonoBehaviour
 {
-    public enum GameState { START, SPAWNHERO, SPAWNENEMY, HEROTURN, ENEMYTURN , ENDGAME }
-
-    public GameState gameState { get; private set; }
+    public static GameManager Instance;
+    public GameState GameState;
 
     public delegate void ChangeStateDelegate();
     public static ChangeStateDelegate changeStateDelegate;
 
-    private static GameManager _instance;
-
-    private GameManager()
+    void Awake()
     {
-     
-        gameState = GameState.START;
-
-    }
-    public static GameManager GetInstance()
-    {
-        if (_instance == null)
-        {
-            _instance = new GameManager();
-        }
-
-        return _instance;
+        Instance = this;
     }
 
-    public void ChangeState(GameState nextState)
+    void Start()
     {
-        if (nextState == GameState.SPAWNHERO) 
-        {
-            UnitManager.Instance.SpawnHeroes();
-            Debug.Log("SHE");
-        }
-
-        if (nextState == GameState.SPAWNENEMY)
-        {
-            UnitManager.Instance.SpawnEnemies();
-            Debug.Log("SEN");
-        }
-
-        if (nextState == GameState.HEROTURN)
-        {
-            Debug.Log("HERO");
-        }
-
-        gameState = nextState;
-        Debug.Log(gameState);
-        changeStateDelegate();
-
+        ChangeState(GameState.Start);
     }
 
-    private void Reset()
+    public void ChangeState(GameState newState)
     {
-        
+        Debug.Log(newState);
+        GameState = newState;
+        switch (newState)
+        {
+            case GameState.Start:
+                break;
+            case GameState.GenerateGrid:
+                GridManager.Instance.GenerateGrid();
+                break;
+            case GameState.SpawnHeroes:
+                UnitManager.Instance.SpawnHeroes();
+                break;
+            case GameState.SpawnEnemies:
+                UnitManager.Instance.SpawnEnemies();
+                break;
+            case GameState.HeroesTurn:
+                break;
+            case GameState.EnemiesTurn:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+        }
     }
-}
+} 
+public enum GameState
+    {
+        Start = 0,
+        GenerateGrid = 1,
+        SpawnHeroes = 2,
+        SpawnEnemies = 3,
+        HeroesTurn = 4,
+        EnemiesTurn = 5
+    }
