@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager
 {
-    public enum GameState { START, GAME, SPAWN, ENDGAME }
+    public enum GameState { START, SPAWNHERO, SPAWNENEMY, HEROTURN, ENEMYTURN , ENDGAME }
 
     public GameState gameState { get; private set; }
 
@@ -31,10 +31,27 @@ public class GameManager
 
     public void ChangeState(GameState nextState)
     {
-        if (nextState == GameState.GAME) Reset();
+        if (nextState == GameState.SPAWNHERO) 
+        {
+            UnitManager.Instance.SpawnHeroes();
+            Debug.Log("SHE");
+        }
+
+        if (nextState == GameState.SPAWNENEMY)
+        {
+            UnitManager.Instance.SpawnEnemies();
+            Debug.Log("SEN");
+        }
+
+        if (nextState == GameState.HEROTURN)
+        {
+            Debug.Log("HERO");
+        }
 
         gameState = nextState;
+        Debug.Log(gameState);
         changeStateDelegate();
+
     }
 
     private void Reset()

@@ -13,7 +13,7 @@ public class StartGame : MonoBehaviour
 
     public void ClickStart()
     {
-        gm.ChangeState(GameManager.GameState.GAME);
+        gm.ChangeState(GameManager.GameState.SPAWNHERO);
     }
 
     public void ClickQuit()
