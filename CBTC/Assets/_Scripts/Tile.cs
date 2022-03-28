@@ -38,12 +38,34 @@ public class Tile : MonoBehaviour
     void OnMouseDown()
     {
         
-        if (GameManager.Instance.GameState != GameState.HeroesTurn)
+        if(GameManager.Instance.GameState != GameState.HeroesTurn)
         {
-            Debug.Log("NOT HERO");
             return;
         };
-        Debug.Log("CLICK");
+        if(OccupiedUnit != null)
+        {
+            if(OccupiedUnit.Faction == Faction.Hero)
+            {
+                UnitManager.Instance.SetSelectedHero((BaseHero)OccupiedUnit);
+            }
+            else
+            {
+                if (UnitManager.Instance.SelectedHero != null)
+                {
+                    var enemy = (BaseEnemy)OccupiedUnit;
+                    Destroy(enemy.gameObject);
+                    UnitManager.Instance.SetSelectedHero(null);
+                }
+            }
+        }
+        else
+        {
+            if(UnitManager.Instance.SelectedHero != null)
+            {
+                SetUnit(UnitManager.Instance.SelectedHero);
+                UnitManager.Instance.SetSelectedHero(null);
+            }
+        }
     }
 
     public void SetUnit(BaseUnit unit)
